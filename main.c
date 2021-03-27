@@ -668,15 +668,18 @@ void schedule(list * processes, priority_queue *queues, int nqueues) {
     
      printf("TODO: Implementar la planificacion!!\n");
 
-    /*
+    
      while (nprocesses > 0) {    
         // TODO: Implementar la planificación
-         
+		 for (int i=0 ;nprocesses+1;i++) {
+			//processes[i]
+		 }
         //Cuando un proceso termina, decrementar nprocesses.
+		nprocesses = nprocesses - 1;
         //El ciclo termina cuando todos los procesos han terminado,
         //es decir nprocesses = 0 
      }
-     */    
+     
     
     //Imprimir la salida del programa
     
