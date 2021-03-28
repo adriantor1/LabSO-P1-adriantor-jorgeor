@@ -346,7 +346,7 @@ process * create_process(char *filename) {
 
         fd = fopen(filename, "r");
         if (!fd) {
-           printf("file %s not xxxxx found\n", filename);
+           printf("file %s not found\n", filename);
            return ret;
         }
 
