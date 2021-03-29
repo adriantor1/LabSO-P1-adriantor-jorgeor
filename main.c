@@ -4,16 +4,16 @@
  
  Presentado por: 
  
+ Adrian Camilo Torres GÃ³mez 104616011334 adriantor@unicauca.edu.co
  estudiante1 codigo correo
- estudiante1 codigo correo 
  
  IMPORTANTE
- Este código se proporciona como una guía general para implementar
- el simulador de planificación. El estudiante deberá verificar su 
+ Este cÃ³digo se proporciona como una guÃ­a general para implementar
+ el simulador de planificaciÃ³n. El estudiante deberÃ¡ verificar su
  funcionamiento y adaptarlo a las necesidades del problema a solucionar.
  
  El profesor no se hace responsable por las omisiones, los errores o las 
- imprecisiones que se puedan encontrar en este código y los archivos relacionados.
+ imprecisiones que se puedan encontrar en este cÃ³digo y los archivos relacionados.
  
  USO:
  
@@ -149,7 +149,6 @@ int main(int argc, char * argv[]) {
     
     /* Leer el archivo de configuracion, pasado como parametro al main
     o por redireccion de la entrada estandar */
-    
     if (argc < 2) {
        fd = stdin;
     }else {
@@ -158,7 +157,6 @@ int main(int argc, char * argv[]) {
     }
     
     nqueues = 0;
-
     /* Lectura del archivo de configuracion */
     while (!feof(fd)) {
           
@@ -175,7 +173,6 @@ int main(int argc, char * argv[]) {
     
           // Partir la linea en tokens
           t = split(linea, 0);
-          
           //Ignora las lineas que no contienen tokens
           if (t->count == 0) { continue;}
           
@@ -187,7 +184,7 @@ int main(int argc, char * argv[]) {
                 //Comando define queues n   
                if (equals(aux[1], "queues")) {                     
                   nqueues = atoi(aux[2]);
-                  //Crear el arreglo de colas de prioridad y a lista de procesos
+                  //Crear el arreglo de colas de prioridad y la lista de procesos
                   if (nqueues > 0) {
                      queues = create_queues(nqueues);
                      processes = create_list();
@@ -199,7 +196,7 @@ int main(int argc, char * argv[]) {
                     
                     //i = n - 1, los arreglos comienzan en cero
                     i = atoi(aux[2]) - 1;
-                    //printf("Defining scheduling to queue %d\n", i);
+                    printf("Defining scheduling to queue %d\n", i);
                     if (i < 0 || i >= nqueues) {continue;}
                     if (equals(aux[3], "rr")) {
                        queues[i].strategy = RR;
@@ -213,7 +210,7 @@ int main(int argc, char * argv[]) {
                     //Comando scheduling n QUANTUM
                     //n = 1 ... # de colas de prioridad
                     i = atoi(aux[2]) - 1;
-                    //printf("Defining quantum to queue %d\n", i);
+                    printf("Defining quantum to queue %d\n", i);
                     quantum = atoi(aux[3]);
                     if (i < 0 || i >= nqueues) {continue;}
                     queues[i].quantum = quantum;
@@ -486,7 +483,7 @@ void prepare(list * processes, priority_queue *queues, int nqueues) {
    /* Limpiar las colas de prioridad */
 
    for (i=0; i<nqueues; i++) {
-       //printf("Clearing queue %d\n", i);
+       printf("Clearing queue %d\n", i);
        if (queues[i].ready != 0) {
           clear_list(queues[i].ready);
           queues[i].ready = create_list();
@@ -510,10 +507,10 @@ void prepare(list * processes, priority_queue *queues, int nqueues) {
        insert_ordered(queues[p->priority].arrival, p, compare_arrival);                    
    }
 
-   printf("Prepared queues:\n");
-   for (i=0; i<nqueues; i++) {
-        print_queue(&queues[i]);
-   }
+   //printf("Prepared queues:\n");
+   //for (i=0; i<nqueues; i++) {
+      //print_queue(&queues[i]);
+   //}
 
    system("pause");
       
@@ -666,11 +663,11 @@ void schedule(list * processes, priority_queue *queues, int nqueues) {
     //Numero de procesos que falta por ejecutar     
     nprocesses = processes->count;
     
-     printf("TODO: Implementar la planificacion!!\n");
+     //printf("TODO: Implementar la planificacion!!\n");
 
     
      while (nprocesses > 0) {    
-        // TODO: Implementar la planificación
+        // TODO: Implementar la planificaciï¿½n
 		 for (int i=0 ;nprocesses+1;i++) {
 			//processes[i]
 		 }
