@@ -5,7 +5,7 @@
  Presentado por: 
  
  Adrian Camilo Torres Gómez 104616011334 adriantor@unicauca.edu.co
- estudiante1 codigo correo
+ Jorge Ortis codigo jorgeor@unicauca.edu.co
  
  IMPORTANTE
  Este código se proporciona como una guía general para implementar
@@ -196,7 +196,7 @@ int main(int argc, char * argv[]) {
                     
                     //i = n - 1, los arreglos comienzan en cero
                     i = atoi(aux[2]) - 1;
-                    printf("Defining scheduling to queue %d\n", i);
+                    //printf("Defining scheduling to queue %d\n", i);
                     if (i < 0 || i >= nqueues) {continue;}
                     if (equals(aux[3], "rr")) {
                        queues[i].strategy = RR;
@@ -210,7 +210,7 @@ int main(int argc, char * argv[]) {
                     //Comando scheduling n QUANTUM
                     //n = 1 ... # de colas de prioridad
                     i = atoi(aux[2]) - 1;
-                    printf("Defining quantum to queue %d\n", i);
+                    //printf("Defining quantum to queue %d\n", i);
                     quantum = atoi(aux[3]);
                     if (i < 0 || i >= nqueues) {continue;}
                     queues[i].quantum = quantum;
@@ -483,7 +483,7 @@ void prepare(list * processes, priority_queue *queues, int nqueues) {
    /* Limpiar las colas de prioridad */
 
    for (i=0; i<nqueues; i++) {
-       printf("Clearing queue %d\n", i);
+       //printf("Clearing queue %d\n", i);
        if (queues[i].ready != 0) {
           clear_list(queues[i].ready);
           queues[i].ready = create_list();
@@ -512,7 +512,7 @@ void prepare(list * processes, priority_queue *queues, int nqueues) {
       //print_queue(&queues[i]);
    //}
 
-   system("pause");
+   //system("pause");
       
 }
 
@@ -667,19 +667,31 @@ void schedule(list * processes, priority_queue *queues, int nqueues) {
 
     
      while (nprocesses > 0) {    
-        // TODO: Implementar la planificaci�n
-		 for (int i=0 ;nprocesses+1;i++) {
-			//processes[i]
-		 }
-        //Cuando un proceso termina, decrementar nprocesses.
-		nprocesses = nprocesses - 1;
-        //El ciclo termina cuando todos los procesos han terminado,
-        //es decir nprocesses = 0 
-     }
+         // TODO: Implementar la planificación
+         //tiempo_actual = MINIMO TIEMPO DE LLEGADA DE TODOS LOS PROCESOS
+         int tiempo_actual = 0;
+         node_iterator it;
+         for (it = head(processes); it != 0; it = next(it))
+         {
+            process * p = (process *)it->data;
+            //print_process(p);
+            tiempo_actual = p->arrival_time;
+
+         }
+         
+		   for (int i=0 ;nprocesses+1;i++) {
+			   //processes[i]
+		   }
+         //Cuando un proceso termina, decrementar nprocesses.
+		   nprocesses = nprocesses - 1;
+         //El ciclo termina cuando todos los procesos han terminado,
+         //es decir nprocesses = 0 
+      }
      
     
     //Imprimir la salida del programa
-    
+    printf("*****Resultados de la simulación***** \n");
+
    
 }
 

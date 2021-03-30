@@ -1,0 +1,5 @@
+BEGIN 2 0
+ CPU 5
+ CPU 10
+ CPU 4
+END

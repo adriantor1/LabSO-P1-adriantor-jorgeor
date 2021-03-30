@@ -1,0 +1,4 @@
+BEGIN 1 10
+ CPU 10
+ CPU 20
+END
