@@ -104,7 +104,7 @@ static __inline__ void * insert_ordered(list *l, void * data,
     }                                                                       
                                                                                
     l->count++;                                                             
-                                                                               
+    //printf("%s",data);                                                           
     return data;
 }
                                                                             

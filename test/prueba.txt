@@ -2,12 +2,12 @@ define queues 1
 define scheduling 1 RR
 define quantum 1 5
 
-process a.txt
-process b.txt
-process c.txt
-process d.txt
-process e.txt
-process f.txt
+process test/a.txt
+process test/b.txt
+process test/c.txt
+process test/d.txt
+process test/e.txt
+process test/f.txt
 
 start
 

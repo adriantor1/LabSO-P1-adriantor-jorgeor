@@ -1,0 +1,9 @@
+define queues 1
+define scheduling 1 RR
+define quantum 1 5
+
+process example/a.txt
+process example/b.txt
+process example/c.txt
+
+start
