@@ -647,45 +647,51 @@ int count_blocked(priority_queue *queue) {
 /* Rutina para la planificacion.*/
 void schedule(list * processes, priority_queue *queues, int nqueues) {
     
-    int finished;
-    int nprocesses;
+   int finished;
+   int nprocesses;
     
-    //Preparar para una nueva simulacion
-    //Inicializar las colas de prioridad con la informacion de la lista
-    //de procesos leidos
-    prepare(processes, queues, nqueues);
+   //Preparar para una nueva simulacion
+   //Inicializar las colas de prioridad con la informacion de la lista
+   //de procesos leidos
+   prepare(processes, queues, nqueues);
     
-    priority_queue current_queue;
-    
-
-    
-    
-    //Numero de procesos que falta por ejecutar     
-    nprocesses = processes->count;
-    
+   //Numero de procesos que falta por ejecutar     
+   nprocesses = processes->count;
    //printf("TODO: Implementar la planificacion!!\n");
+
    //tiempo_actual = MINIMO TIEMPO DE LLEGADA DE TODOS LOS PROCESOS
    int tiempo_actual = 0;
-   node_iterator it;
-   it = head(processes);
+   node_iterator it = head(processes);
    process * p = (process *)it->data;
    tiempo_actual = p->arrival_time;
-    
-   while (nprocesses > 0) {    
-      // TODO: Implementar la planificación
-      /*for (it = head(processes); it != 0; it = next(it))
-      {
-         process * p = (process *)it->data;
-         //print_process(p);
-         tiempo_minimo = p->arrival_time;
-         if (tiempo_minimo<tiempo_actual)
+   int varEsColaEncontrada=0;
+   //cola_actual = COLA EN LA CUAL SE ENCUENTRA EL PROCESO CON TIEMPO = tiempo_actual
+   priority_queue * current_queue;
+   for (int i = 0; i < nqueues; i++)
+   {
+      priority_queue * cola_it = &queues[i];
+      node_iterator ptr;
+      for ( ptr = head(cola_it->arrival); ptr !=0; ptr = next(ptr)) {
+                 
+         if (strcmp(ptr->data,p->name)==0)
          {
-            tiempo_actual=tiempo_minimo;
+            current_queue = cola_it;
+            varEsColaEncontrada=1;
+            break;
          }
-         else if(tiempo_minimo == tiempo_actual && queues->strategy==RR){             
-         }
-      }*/
-      
+      }
+      if (varEsColaEncontrada==1)
+      {
+         break;
+      }      
+   }   
+   
+   
+   //printf("%s",it_c->data);
+   //cola_actual = (priority_queue * ) it->data;
+   
+   while (nprocesses > 0) {    
+      //TODO: Implementar la planificación
       //for (int i=0 ;nprocesses+1;i++) {
          //processes[i]
       //}
