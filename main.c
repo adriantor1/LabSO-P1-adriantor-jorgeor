@@ -671,13 +671,21 @@ void schedule(list * processes, priority_queue *queues, int nqueues) {
          //tiempo_actual = MINIMO TIEMPO DE LLEGADA DE TODOS LOS PROCESOS
          int tiempo_actual = 0;
          node_iterator it;
-         for (it = head(processes); it != 0; it = next(it))
+         it = head(processes);
+         process * p = (process *)it->data;
+         tiempo_actual = p->arrival_time;
+         /*for (it = head(processes); it != 0; it = next(it))
          {
             process * p = (process *)it->data;
             //print_process(p);
-            tiempo_actual = p->arrival_time;
-
-         }
+            tiempo_minimo = p->arrival_time;
+            if (tiempo_minimo<tiempo_actual)
+            {
+               tiempo_actual=tiempo_minimo;
+            }
+            else if(tiempo_minimo == tiempo_actual && queues->strategy==RR){             
+            }
+         }*/
          
 		   for (int i=0 ;nprocesses+1;i++) {
 			   //processes[i]

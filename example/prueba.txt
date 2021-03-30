@@ -1,6 +1,13 @@
-define queues 1
-define scheduling 1 RR
-define quantum 1 5
+#Utilizar tres colas de prioridad
+DEFINE queues 3
+#Definir la estrategia para cada cola
+DEFINE scheduling 1 RR
+DEFINE scheduling 2 RR
+DEFINE scheduling 3 FIFO
+#Definir quantum (prioridad) para cada cola
+DEFINE quantum 1 5
+DEFINE quantum 2 4
+DEFINE quantum 3 2
 
 process example/a.txt
 process example/b.txt
