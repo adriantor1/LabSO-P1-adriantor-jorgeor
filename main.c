@@ -663,44 +663,41 @@ void schedule(list * processes, priority_queue *queues, int nqueues) {
     //Numero de procesos que falta por ejecutar     
     nprocesses = processes->count;
     
-     //printf("TODO: Implementar la planificacion!!\n");
-
+   //printf("TODO: Implementar la planificacion!!\n");
+   //tiempo_actual = MINIMO TIEMPO DE LLEGADA DE TODOS LOS PROCESOS
+   int tiempo_actual = 0;
+   node_iterator it;
+   it = head(processes);
+   process * p = (process *)it->data;
+   tiempo_actual = p->arrival_time;
     
-     while (nprocesses > 0) {    
-         // TODO: Implementar la planificación
-         //tiempo_actual = MINIMO TIEMPO DE LLEGADA DE TODOS LOS PROCESOS
-         int tiempo_actual = 0;
-         node_iterator it;
-         it = head(processes);
+   while (nprocesses > 0) {    
+      // TODO: Implementar la planificación
+      /*for (it = head(processes); it != 0; it = next(it))
+      {
          process * p = (process *)it->data;
-         tiempo_actual = p->arrival_time;
-         /*for (it = head(processes); it != 0; it = next(it))
+         //print_process(p);
+         tiempo_minimo = p->arrival_time;
+         if (tiempo_minimo<tiempo_actual)
          {
-            process * p = (process *)it->data;
-            //print_process(p);
-            tiempo_minimo = p->arrival_time;
-            if (tiempo_minimo<tiempo_actual)
-            {
-               tiempo_actual=tiempo_minimo;
-            }
-            else if(tiempo_minimo == tiempo_actual && queues->strategy==RR){             
-            }
-         }*/
-         
-		   for (int i=0 ;nprocesses+1;i++) {
-			   //processes[i]
-		   }
-         //Cuando un proceso termina, decrementar nprocesses.
-		   nprocesses = nprocesses - 1;
-         //El ciclo termina cuando todos los procesos han terminado,
-         //es decir nprocesses = 0 
-      }
-     
+            tiempo_actual=tiempo_minimo;
+         }
+         else if(tiempo_minimo == tiempo_actual && queues->strategy==RR){             
+         }
+      }*/
+      
+      //for (int i=0 ;nprocesses+1;i++) {
+         //processes[i]
+      //}
+      //Cuando un proceso termina, decrementar nprocesses.
+      nprocesses = nprocesses - 1;
+      //El ciclo termina cuando todos los procesos han terminado,
+      //es decir nprocesses = 0 
+   }
+   
     
     //Imprimir la salida del programa
     printf("*****Resultados de la simulación***** \n");
-
-   
 }
 
 void update_waiting_time(list * processes, int t) {
