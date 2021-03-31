@@ -711,6 +711,7 @@ void schedule(list * processes, priority_queue *queues, int nqueues) {
          proceso_actual->status=READY;
          //poner al proceso_actual en su cola correspondiente,
          //de acuerdo con el algoritmo de planificacion de la cola
+         
       }
       
       //Cuando un proceso termina, decrementar nprocesses.
