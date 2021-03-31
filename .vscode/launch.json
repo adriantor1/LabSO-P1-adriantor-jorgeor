@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "C:\\Users\\ADRIAN\\Desktop\\Semestre_2021-1\\SO\\Parcial1Lab\\LabSO-P1-adriantor-jorgeor\\main.exe",
-            "args": ["example\\prueba.txt"],
+            "args": ["example2\\prueba.txt"],
             //"args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

@@ -390,7 +390,6 @@ process * create_process(char *filename) {
            merge_slices(ret);
            fclose(fd);
         //print_process(ret);
-
         return ret;       
 
 }
@@ -453,8 +452,7 @@ void print_process(process *p) {
      p->name, p->priority, p->arrival_time, p->finished_time, p->waiting_time);
      //UNDEFINED, LOADED, READY, RUNNING, BLOCKED, FINISHED
      printf("\tStatus: %s\n", (p->status == READY)?"Ready":(p->status==LOADED)?"loaded":(p->status == BLOCKED)?"blocked":(p->status == FINISHED)?"Finished":"unknown");
-     printf("Instructions: %d\n", p->instructions->count);    
-    
+     printf("Instructions: %d\n", p->instructions->count);        
      for ( ptr = head(p->instructions); ptr !=0; ptr = next(ptr)) {
            ins = (instruction *)ptr->data;
            printf("\t%s %d\n",(ins->type == CPU)?"CPU":"LOCK", ins->time);
@@ -654,17 +652,21 @@ void schedule(list * processes, priority_queue *queues, int nqueues) {
    //Inicializar las colas de prioridad con la informacion de la lista
    //de procesos leidos
    prepare(processes, queues, nqueues);
-    
-   //Numero de procesos que falta por ejecutar     
-   nprocesses = processes->count;
-   //printf("TODO: Implementar la planificacion!!\n");
 
    //tiempo_actual = MINIMO TIEMPO DE LLEGADA DE TODOS LOS PROCESOS
    int tiempo_actual = 0;
    node_iterator it = head(processes);
-   process * p = (process *)it->data;
-   tiempo_actual = p->arrival_time;
+   process * p_init = (process *)it->data;
+   for (it; it !=0; it = next(it)){
+      process * it_p = (process *)it->data;
+      if (it_p->arrival_time == p_init->arrival_time && p_init->priority > it_p->priority)
+      {
+         p_init = it_p;
+      }
+   }
+   tiempo_actual = p_init->arrival_time;
    int varEsColaEncontrada=0;
+
    //cola_actual = COLA EN LA CUAL SE ENCUENTRA EL PROCESO CON TIEMPO = tiempo_actual
    priority_queue * current_queue;
    for (int i = 0; i < nqueues; i++)
@@ -672,8 +674,8 @@ void schedule(list * processes, priority_queue *queues, int nqueues) {
       priority_queue * cola_it = &queues[i];
       node_iterator ptr;
       for ( ptr = head(cola_it->arrival); ptr !=0; ptr = next(ptr)) {
-                 
-         if (strcmp(ptr->data,p->name)==0)
+
+         if (strcmp(ptr->data,p_init->name)==0)
          {
             current_queue = cola_it;
             varEsColaEncontrada=1;
@@ -684,17 +686,33 @@ void schedule(list * processes, priority_queue *queues, int nqueues) {
       {
          break;
       }      
-   }   
+   }
+
+   //proceso_actual = NULO
+   process * proceso_actual=NULL;
+
+   //Numero de procesos que falta por ejecutar     
+   nprocesses = processes->count;
    
-   
-   //printf("%s",it_c->data);
-   //cola_actual = (priority_queue * ) it->data;
-   
-   while (nprocesses > 0) {    
-      //TODO: Implementar la planificación
-      //for (int i=0 ;nprocesses+1;i++) {
-         //processes[i]
-      //}
+   while (nprocesses > 0) {
+
+      //TODO: Implementar la planificación      
+      for (node_iterator it = head(processes); it !=0; it = next(it)){
+         process * p = (process *)it->data;
+         if (p->status == LOADED && p->arrival_time <= tiempo_actual)
+         {
+            p->status = READY;
+            //print_process(p);
+         }
+         
+      }
+      if (proceso_actual!=NULL)
+      {
+         proceso_actual->status=READY;
+         //poner al proceso_actual en su cola correspondiente,
+         //de acuerdo con el algoritmo de planificacion de la cola
+      }
+      
       //Cuando un proceso termina, decrementar nprocesses.
       nprocesses = nprocesses - 1;
       //El ciclo termina cuando todos los procesos han terminado,
@@ -703,7 +721,15 @@ void schedule(list * processes, priority_queue *queues, int nqueues) {
    
     
     //Imprimir la salida del programa
-    printf("*****Resultados de la simulación***** \n");
+    printf(" -----------------------------------------------------------------------------------\n");
+    printf("||                      *****Resultados de la simulación*****                      ||\n");
+    printf("|| Colas de prioridad           : %d                                                ||\n",nqueues);
+    printf("|| Tiempo total de la simulación:                                                  ||\n");
+    printf("|| Tiempo promedio de espera    :                                                  ||\n");
+    printf("|| #Proceso       T.Llegada      Tamaño        T.Espera       T.Finalizacion       ||\n");
+    printf("|| ------------------------------------------------------------------------------- ||\n");
+    printf("|| Secuencia de ejecucion:                                                         ||\n");
+    printf(" -----------------------------------------------------------------------------------\n");
 }
 
 void update_waiting_time(list * processes, int t) {
