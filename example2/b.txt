@@ -1,0 +1,7 @@
+#formato: begin PRIORITY ARRIVAL
+#           cpu TIME
+#         end
+
+begin 2 1
+cpu 5
+end

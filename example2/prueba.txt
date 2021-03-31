@@ -1,0 +1,18 @@
+define queues 3
+define scheduling 1 RR
+define scheduling 2 SRT
+define scheduling 3 FIFO
+define quantum 1 4
+define quantum 2 2
+define quantum 3 1
+process example2/a.txt
+process example2/b.txt
+process example2/c.txt
+process example2/d.txt
+process example2/e.txt
+process example2/f.txt
+process example2/g.txt
+start
+
+
+
